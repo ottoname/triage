@@ -1,0 +1,36 @@
+@keyframes sLideInLeft{
+    from{
+        transform: translateX(-300px);
+    }
+    to{
+        transform: translateX(0);
+    }
+}
+@keyframes animatebottom { 
+    from{ bottom:-100px; opacity:0 } 
+    to{ bottom:0; opacity:1 }
+  }
+
+
+
+
+@media only screen and (max-width: 600px) {
+    h1{
+        text-size-adjust: 150px;
+    }
+
+  }
+  #image-track > .image{
+    width: 40vmin;
+    height: 56vmin;
+    object-fit: cover ;
+    object-position: center 50%;
+}
+#image-track{
+    display: flex;
+    gap: 4vmin;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(0%,-50%);
+}
