@@ -51,6 +51,7 @@
 </head>
 
 <body>
+
     <div class="justify-content-center" id="button">
         <div class=" d-md-flex justify-content-md-end">
             <button type="button" class="btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
@@ -62,18 +63,17 @@
         <div style="height: 120px;margin: auto;">
             <div class="shadow-lg p-3  rounded rounded ">
                 <div>
-                    <h1>... am Gay </h1>
+                    <h1 id="nextButton">... am Gay </h1>
+                    <p>Current Number: <span id="number">0</span></p>
                 </div>
             </div>
         </div>
 
 
         <div class="grid-container" style="margin-left: 5%;">
-            <nav class="shadow btn answer_bt_yes" style="text-align: center;padding-top: 150px">Yes</nav>
-            <article class="shadow btn answer_bt_no" style="text-align: center;padding-top: 150px">No</article>
+            <nav class="shadow btn answer_bt_yes" style="text-align: center;padding-top: 150px" onclick="nextQuestion()">Yes</nav>
+            <article class="shadow btn answer_bt_no" style="text-align: center;padding-top: 150px" onclick="incrementNumber()">No</article>
         </div>
-
-
 
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
@@ -128,19 +128,71 @@
       </div>
 
 
-</body>
+      <button id="nextButton" class="next-button" onclick="nextQuestion()">Next Question</button>
 
+<!-- 
 <script>
-
+let count = 0;
 const Question = ["...am Gay", "are you skibidi", "Death"];
 
+function numberQuestion(){
+    count++;
+    document.getElementById('number').textContent = count;
+  }
+}
+</script> -->
+
+<!-- count number -->
+
+<!-- 
+let count = 0; // Initial count
+  
+  function incrementNumber() {
+    count++;
+    const Question[count] = ["hi","gay","hello"]
+    document.getElementById('number').textContent = `Q ${QuestionNumber} and`;
+  } -->
+
+<script>
+  
+
+
+      // Array of questions
+    const questions = ["Hi", "How are you?", "Hello", "What's up?", "Good day"];
+
+    // Index to keep track of the current question
+    let currentQuestionIndex = 0;
+
+    // Function to display the next question
+    function nextQuestion() {
+      // Get the button element
+      const button = document.getElementById('nextButton');
+
+      // Increment index and loop back to the start if necessary
+      currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+
+      // Update button text with the next question
+      button.textContent = questions[currentQuestionIndex];
+    }
+
+    // Display the initial question on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      const button = document.getElementById('nextButton');
+      button.textContent = questions[currentQuestionIndex];
+    }); 
 </script>
+</body>
 
 </html>       
 
 
-i[6] = i{0,1,2,3,4,5}
+singma i = i = 1 - n
+= (n+1)(2n+1)d/6
+[3x4]
++ biase value
 
+decetion tree 
+methhd
 
 
 
