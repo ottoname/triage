@@ -63,8 +63,8 @@
         <div style="height: 120px;margin: auto;">
             <div class="shadow-lg p-3  rounded rounded ">
                 <div>
-                    <h1 id="nextButton">... am Gay </h1>
-                    <p>Current Number: <span id="number">0</span></p>
+                    <h1 id="nextButton">...</h1>
+                    <!-- <p>Current Number: <span id="number">0</span></p> -->
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
 
         <div class="grid-container" style="margin-left: 5%;">
             <nav class="shadow btn answer_bt_yes" style="text-align: center;padding-top: 150px" onclick="nextQuestion()">Yes</nav>
-            <article class="shadow btn answer_bt_no" style="text-align: center;padding-top: 150px" onclick="incrementNumber()">No</article>
+            <article class="shadow btn answer_bt_no" style="text-align: center;padding-top: 150px" onclick="nextQuestion()">No</article>
         </div>
 
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -130,70 +130,89 @@
 
       <button id="nextButton" class="next-button" onclick="nextQuestion()">Next Question</button>
 
-<!-- 
-<script>
-let count = 0;
-const Question = ["...am Gay", "are you skibidi", "Death"];
-
-function numberQuestion(){
-    count++;
-    document.getElementById('number').textContent = count;
-  }
-}
-</script> -->
-
-<!-- count number -->
-
-<!-- 
-let count = 0; // Initial count
-  
-  function incrementNumber() {
-    count++;
-    const Question[count] = ["hi","gay","hello"]
-    document.getElementById('number').textContent = `Q ${QuestionNumber} and`;
-  } -->
 
 <script>
   
+//        // Array of questions
+//        const questions = ["Hi", "How are you?", "Hello", "What's up?", "Good day"];
+
+// // Index array to keep track of the current question
+// let currentIndexArray = [0];
+
+// // Function to display the next question
+// function nextQuestion() {
+//     // Get the button element
+//     const button = document.getElementById('nextButton');
+
+//     // Calculate the next index
+//     let nextIndex = currentIndexArray[currentIndexArray.length - 1] + 1;
+
+//     // Check if we've reached the end of the questions array
+//     if (nextIndex < questions.length) {
+//         currentIndexArray.push(nextIndex);
+//         button.textContent = questions[nextIndex];
+//     } else {
+//         button.disabled = true; // Disable the button if no more questions
+//         button.textContent = "No more questions";
+//     }
+// }
+
+// // Display the initial question on page load
+// document.addEventListener('DOMContentLoaded', function() {
+//     const button = document.getElementById('nextButton');
+//     button.textContent = questions[currentIndexArray[0]];
+// });
+
+const qaArray = [
+            { question: "Hi", answers: ["Hello", "Hi there"] },
+            { question: "How are you?", answers: ["Good", "Not bad"] },
+            { question: "Hello", answers: ["Hi", "Hey"] },
+            { question: "What's up?", answers: ["Not much", "Just hanging out"] },
+            { question: "Good day", answers: ["Indeed", "Yes, it is"] }
+        ];
+
+        // Index array to keep track of the current question
+        let currentIndexArray = [0];
+
+        // Function to display the next question and answers
+        function nextQuestion(buttonIndex) {
+            // Calculate the next index
+            let nextIndex = currentIndexArray[currentIndexArray.length - 1] + 1;
+
+            // Check if we've reached the end of the qaArray
+            if (nextIndex < qaArray.length) {
+                currentIndexArray.push(nextIndex);
+                displayQuestionAndAnswers(nextIndex);
+            } else {
+                const questionContainer = document.getElementById('questionContainer');
+                questionContainer.textContent = "No more questions";
+                document.getElementById('answerButton1').disabled = true;
+                document.getElementById('answerButton2').disabled = true;
+            }
+        }
+
+        // Function to display the current question and answers
+        function displayQuestionAndAnswers(index) {
+            const questionContainer = document.getElementById('questionContainer');
+            const answerButton1 = document.getElementById('answerButton1');
+            const answerButton2 = document.getElementById('answerButton2');
+
+            questionContainer.textContent = qaArray[index].question;
+            answerButton1.textContent = qaArray[index].answers[0];
+            answerButton2.textContent = qaArray[index].answers[1];
+        }
+
+        // Display the initial question and answers on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            displayQuestionAndAnswers(currentIndexArray[0]);
+        });
 
 
-      // Array of questions
-    const questions = ["Hi", "How are you?", "Hello", "What's up?", "Good day"];
-
-    // Index to keep track of the current question
-    let currentQuestionIndex = 0;
-
-    // Function to display the next question
-    function nextQuestion() {
-      // Get the button element
-      const button = document.getElementById('nextButton');
-
-      // Increment index and loop back to the start if necessary
-      currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
-
-      // Update button text with the next question
-      button.textContent = questions[currentQuestionIndex];
-    }
-
-    // Display the initial question on page load
-    document.addEventListener('DOMContentLoaded', function() {
-      const button = document.getElementById('nextButton');
-      button.textContent = questions[currentQuestionIndex];
-    }); 
 </script>
 </body>
 
+
 </html>       
-
-
-singma i = i = 1 - n
-= (n+1)(2n+1)d/6
-[3x4]
-+ biase value
-
-decetion tree 
-methhd
-
 
 
 
