@@ -63,7 +63,7 @@
         <div style="height: 120px;margin: auto;">
             <div class="shadow-lg p-3  rounded rounded ">
                 <div>
-                    <h1 id="nextButton">...</h1>
+                    <h1 id="questionContainer">...</h1>
                     <!-- <p>Current Number: <span id="number">0</span></p> -->
                 </div>
             </div>
@@ -71,8 +71,10 @@
 
 
         <div class="grid-container" style="margin-left: 5%;">
-            <nav class="shadow btn answer_bt_yes" style="text-align: center;padding-top: 150px" onclick="nextQuestion()">Yes</nav>
-            <article class="shadow btn answer_bt_no" style="text-align: center;padding-top: 150px" onclick="nextQuestion()">No</article>
+            <nav class="shadow btn answer_bt_yes" id="answerButton1" style="text-align: center;padding-top: 150px" onclick="nextQuestion(0)">Yes</nav>
+            <article class="shadow btn answer_bt_no" id="answerButton2" style="text-align: center;padding-top: 150px" onclick="nextQuestion(1
+
+            )">No</article>
         </div>
 
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">

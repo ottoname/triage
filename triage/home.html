@@ -22,15 +22,18 @@
             color: white;
             border-radius: 50px;
         }
-
+        .content {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          flex-grow: 1;
+          justify-content: center;
+          gap: 20px;
+       }
     </style>
 </head>
 
-
-
-
 <body>
-
     <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: black;">
         <div class="container-fluid">
           <a class="navbar-brand" href="home.html" >TRIAGE</a>
@@ -59,19 +62,18 @@
           </div>
         </div>
       </nav>
-  
-<h1 class="display-1">TRIAGE </h1>
+<div class="content">
 
 
+  <h1 class="display-1">TRIAGE </h1>
 
-<div class="grid-container">
-    <nav class="shadow btn answer_bt_yes start_bt">Yes</nav>
+  <br>
+  <hr>
+
+  <div class="grid-container">
+      <nav class="shadow btn answer_bt_yes start_bt">Yes</nav>
+  </div>
 </div>
-
-<br>
-<hr>
-
-<h1>what is Triage</h1>
 
 </body>
 
@@ -82,7 +84,6 @@ const Question = ["...am Gay", "are you skibidi", "Death"];
 </script>
 
 </html>       
-
 
 
 
