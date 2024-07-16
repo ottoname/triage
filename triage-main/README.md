@@ -1,2 +1,0 @@
-# triage
-Triage AI Master 😈
