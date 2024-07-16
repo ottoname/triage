@@ -47,6 +47,9 @@
             background-color: rgb(137, 230, 160);
             transition: 1s;
         }
+        .pagecanvas{
+            margin: 100px;
+        }
     </style>
 </head>
 
@@ -59,6 +62,8 @@
                     jus></button>
         </div>
         
+<div class="pageCanvas">
+
         <h1 class="display-1">Question</h1>
         <div style="height: 120px;margin: auto;">
             <div class="shadow-lg p-3  rounded rounded ">
@@ -72,9 +77,7 @@
 
         <div class="grid-container" style="margin-left: 5%;">
             <nav class="shadow btn answer_bt_yes" id="answerButton1" style="text-align: center;padding-top: 150px" onclick="nextQuestion(0)">Yes</nav>
-            <article class="shadow btn answer_bt_no" id="answerButton2" style="text-align: center;padding-top: 150px" onclick="nextQuestion(1
-
-            )">No</article>
+            <article class="shadow btn answer_bt_no" id="answerButton2" style="text-align: center;padding-top: 150px" onclick="nextQuestion(1)">No</article>
         </div>
 
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -86,7 +89,7 @@
                 <div id="navbarNav">
                     <ul class="navbar-nav">
                         <li>
-                            <a class="nav-link" href="document.html">Main</a>
+                            <a class="nav-link" href="home.html" style="font-weight: bold;font-size: 40px;">&#128507;HOME</a>
                         </li>
                         <li>
                             <h3><b>Style</b></h3>
@@ -109,13 +112,15 @@
             </nav>
         </div>
     </div>
-
+ 
     <div style="margin: 5%;">
-        <button type="button" class="btn btn-dark" ><a href="document.html" style="text-decoration: none;color: #ffff;">Back</a></button>
-        <button type="button" class="btn btn-dark" ><a href="document.html" style="text-decoration: none;color: #ffff;">Next</a></button>
+        <button type="button" class="btn btn-dark"  onclick="backQuestion()">Back</a></button>
+        <button type="button" class="btn btn-dark" >Next</a></button>
     </div>
 
-    <div>
+
+    </div>
+    <!-- <div>
     <ul class="nav justify-content-center">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#"><img src="icon/setting.png"style="width: 20px;"></a>
@@ -127,10 +132,10 @@
           <a class="nav-link" href="#">Link</a>
         </li>
       </ul>
-      </div>
+      </div> -->
 
 
-      <button id="nextButton" class="next-button" onclick="nextQuestion()">Next Question</button>
+      <!-- <button id="nextButton" class="next-button" onclick="nextQuestion()">Next Question</button> -->
 
 
 <script>
@@ -176,6 +181,17 @@ const qaArray = [
         // Index array to keep track of the current question
         let currentIndexArray = [0];
 
+
+        function backQuestion() {
+            // Check if there's a previous question to go back to
+            if (currentIndexArray.length > 1) {
+                currentIndexArray.pop(); // Remove the current question index
+                const prevIndex = currentIndexArray[currentIndexArray.length - 1];
+                displayQuestionAndAnswers(prevIndex);
+            } else {
+                console.log("Already at the first question.");
+            }
+        }
         // Function to display the next question and answers
         function nextQuestion(buttonIndex) {
             // Calculate the next index
