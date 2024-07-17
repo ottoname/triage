@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Scenario Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Random Scenario Generator</h1>
+        <p id="quote">Click the button to generate a random scenario.</p>
+        <button id="generateButton">Generate Scenario</button>
+    </div>
+    <script>
+        const quotes = [
+            "Joe is 47 years of age; he presents to the ED with a letter of referral from his local doctor. He has left flank pain radiating to his groin. His local doctor has given him oxycodone 5 mg with little effect. He has a history of left renal colic. His respiratory rate is 26 breaths per minute, his heart rate is 120 beats per minute and his blood pressure is 128/78 mmHg. His skin is cool and clammy. He rates his pain as 8/10. - 1 ",
+            "Albert, 44 years, was on his tractor this morning when a foreign body flicked into his eye. His eye is tearing, and he still has the sensation that ‘something is there’. He says he has ‘no pain’, but the eye is ‘uncomfortable’. His visual acuity is normal. There are no visible injuries to the eye. - 2",
+            "Shane is a 30-year-old man who presents to the ED reporting a frontal headache increasing in severity over the past few days. The patient states he has been thinking of harming himself, wants to ‘get help’ and is cooperative and does not seem agitated. If he cannot sort out his problems, he says he will ‘go and jump off a bridge’. He has no previous neurological history and no previous suicide attempts.- 3",
+            "Dima is a 91-year-old woman of non-English speaking background. She is brought to the ED in her son’s car after seeing her local doctor. You are called to assist her to get out of the car. Her son tells you she is ‘very sick’. You note that she can transfer to a wheelchair with minimal assistance. According to her son, Dima tripped and fell three days earlier and has ‘bruised her right hip’. She does not have any other injuries, she is able to walk, and her hip is very painful. She is not distressed when seated. Her respiratory rate is 20 breaths per minute, heart rate is 88 beats per minute and her blood pressure is 150/90 mmHg. You are unable to ascertain her exact level of pain, though she tells you she is ‘alright’. The neurovascular status of her right foot is normal. - 4",
+            "Glen, 52 years, presents to the ED with ‘bleeding haemorrhoids’. He has had this problem ‘on and off for the past few months’, but now it is ‘getting worse’. He says he has considerable pain when he opens his bowels, normally every second day, and bleeds ‘quite a bit’ (about a spoonful at a time of bright blood for the last two days). He states that he needs to be seen by a doctor ‘as soon as possible’ as he considers his problem is ‘an emergency’. His respiratory rate is 16 breaths per minute, heart rate is 78 beats per minute and his blood pressure is 132/78 mmHg.- 5",
+            "Rebecca is a 17-year-old girl who is brought to the ED by her friends following an all-night party, where she took two tablets of ecstasy. She cannot stop crying, and says she wants to die. She has had two previous attempted overdoses in the past year. Her heart rate is 112 beats per minute, respiratory rate is 24 breaths per minute and her temperature 37.6 °C.- 6",
+            "Laura is a 10-year-old girl who is brought to the ED at 11pm by her adult sibling saying that she has had abdominal pain for the last few hours. She indicates that the pain is across the centre of her stomach and that paracetamol has not helped. She complains of nausea and says that she has vomited once since the onset of pain. When asked, she states that she has had normal bowel motions. She is giving her own history while leaning over onto the desk, holding her abdomen, and moving very little. Her skin is pink, and she is not short of breath. Her respiratory rate is 22 breaths per minute and her heart rate is 98 beats per minute. - 7",
+            "Kylie, a 28-year-old woman, presents to triage with three days of fever and increasing shortness of breath. She is 28 weeks pregnant (G2P1) and has no medical history of note. She says she saw her local doctor yesterday and commenced oral antibiotics. Today she tells you she is having ‘difficulty walking around the house’ because of ‘shortness of breath’. She has a productive cough with green sputum and is speaking in phrases. Her respiratory rate is 32 breaths per minute and SpO2 is 90%. Her heart rate is 130 beats per minute; her skin is pale, hot, and moist to touch. Her GCS is 15/15, her temperature is 38.8 °C. - 8",
+            "Charlie is a 15-month-old boy who presents to the ED via ambulance at 2am following an episode of ‘shaking and jerking’ with loss of consciousness. The episode lasted approximately four minutes. The paramedics state that he had stopped fitting when they arrived, but he has been ‘very drowsy’ during transport. His mother states that he has never had an episode like this before. During the night, he had a fever and a runny nose. He has been sleeping poorly and is a little irritable. The child is flushed, his skin is warm, and his capillary refill is about 2 seconds. His heart rate is 153 beats per minute and his respiratory rate is 36 breaths per minute, his temperature is 38.6 °C. He has no use of accessory muscles or retraction. He is alert, crying and clinging to his mother. His mother says that he seems more alert now than before. - 9",
+            "Graham is a 55-year-old man who presents to the ED accompanied by his partner. He states that he has been ‘bleeding from the back passage’ since the previous night. He is very anxious about the bleeding and reports that it was ‘bright’ in colour and ‘filled the toilet bowl’ on two occasions. His blood pressure is 155/100 mmHg, heart rate is 102 beats per minute and his respiratory rate is 20 breaths per minute. - 10",
+            "Louisa is a 24-year-old woman who presents to the ED with her friend after ‘fainting’ in the toilet at home. She is reporting left sided abdominal pain, which she has had ‘on and off’ for several months. She previously attended the ED two weeks ago for the same problem. An abdominal ultrasound was performed at that time but identified no abnormalities. She rates her pain as 6/10. Her respiratory rate is 18 breaths per minute, heart rate is 82 beats per minute and her blood pressure is 112/64 mmHg. Her skin is cool and dry. She looks pale and uncomfortable.- 11",
+            "Nisha is a 67-year-old woman who was out shopping with her daughter when she slipped and fell on her outstretched hand, injuring her left wrist. She is not distressed by the pain and rates it as 3/10. Her wrist is tender, but not deformed. Radial pulse is present at 72 beats per minute. The neurovascular status of her left hand is normal. There are no other injuries.- 12",
+            "Kate is 18 years old. She attends triage at 12.30pm with a work colleague. Her hand is wrapped in a tea towel, and she appears pale and anxious. She tells you she has cut her hand with a carving knife. On examination you see a four-centimetre laceration across her left palm. Tendons are on view and the wound is bleeding slowly. Kate tells you she is feeling quite nauseous and her pain is 7/10. Movement and sensation to her fingers are intact. - 13",
+            "Denise is a 34-year-old woman who is transferred to the ED on a 40 °C day via ambulance. According to bystanders she was attending an outdoor barbeque and ‘collapsed in the heat’. Witnesses helped her to an upright position and she was then observed to have a ‘fit’ that lasted approximately two minutes. She was not incontinent, has no evidence of tongue trauma and regained consciousness when she was placed in the supine position. Her respiratory rate is 22 breaths per minute, heart rate is 112 beats per minute, blood pressure is 102/60 mmHg and her GCS is 15/15. Her skin is hot and moist. - 14",
+            "Kimberly is 32 years of age. She was sent to the ED following an accident at work. She was carrying a pot of hot oil and slipped, spilling it on her upper legs. She immediately removed her clothing and stood under a cool shower for fifteen minutes. On arrival in the ED, Kimberly is in considerable pain (9/10). You estimate she has approximately 8% burns to her anterior thighs. Her heart rate is 110 beats per minute and her respiratory rate is 24 breaths per minute - 15",
+            "Tom is a four-year-old boy who presents to the ED with his mother. She states that he fell from a tree. His older brother was the only witness to the fall and claims that Tom fell from about 2 m. Tom’s mum found him lying on the ground and a little ‘dazed’. Since the fall she says he seems ‘drowsy’ and he has vomited twice, once several minutes ago. Tom is now conscious and looking at you, but he is very quiet. His skin is pale and warm. He has no obvious injuries, is moving his neck and is not distressed. - 16",
+            "Justin is a 22-year-old man who comes to the ED concerned about a mole on his back. He says that his girlfriend advised he see a doctor and he is ‘worried that it might be a melanoma’. The mole is large and irregular in shape; he says it is sometimes itchy. - 17",
+            "A young man is brought into the ED by ambulance after having been dragged unconscious and not breathing from the sea. He arrives with CPR in progress, and on arrival is noted to have red welts across his chest. - 18",
+            "Fred, an 84-year-old man, presents to triage reporting palpitations and central chest pain. He has a history of ischemic heart disease, coronary artery by-pass grafts and atrial fibrillation. He takes his anti-arrhythmic medications regularly and normally manages well at home. Today his skin is pale, cool and moist. His respiratory rate is 26 breaths per minute, heart rate is 142 beats per minute and irregular and he reports chest pain of 4/10. - 19",
+            "Michaela is a 3-week-old infant who is brought to the ED by her parents. She has been referred by her local doctor. The parents state that Michaela has been feeding poorly for several days and sleeping more than usual. The parents have not noticed a fever or other symptoms. The infant is sleeping in the mother’s arms and her skin is pale. She is peripherally cool. Her capillary refill is 2–3 seconds and her heart rate is 172 beats per minute. Painful stimulus is required to wake the infant, who then wriggles and cries vigorously. - 20"
+        ];
+        const generateButton = document.getElementById("generateButton");
+        const quoteElement = document.getElementById("quote");
+        generateButton.addEventListener("click", generateRandomQuote);
+        function generateRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            quoteElement.textContent = quotes[randomIndex];
+
+        }
+    </script>
+</body>
+</html>
