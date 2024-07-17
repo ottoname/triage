@@ -5,131 +5,178 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="styles.css" /> 
+    <link rel="stylesheet" type="text/css" href="styles-home.css" /> 
     <title>Triage</title>
     <style>
-        .timeline {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+      body{
+        margin: 10px;
+      }
 
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            background-color: white;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -3px;
-        }
+      .timeline {
+          position: relative;
+          max-width: 1200px;
+          margin: 0 auto;
+      }
 
-        .container {
-            padding: 10px 40px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
-        }
+      .timeline::after {
+          content: '';
+          position: absolute;
+          width: 6px;
+          background-color: white;
+          top: 0;
+          bottom: 0;
+          left: 50%;
+          margin-left: -3px;
+      }
 
-        .container::after {
-            content: '';
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            right: -17px;
-            background-color: white;
-            border: 4px solid #FF9F55;
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-        }
+      .container-scroll {
+          padding: 10px 40px;
+          position: relative;
+          background-color: inherit;
+          width: 50%;
+      }
 
-        .left {
-            left: 0;
-        }
+      .container-scroll::after {
+          content: '';
+          position: absolute;
+          width: 25px;
+          height: 25px;
+          right: -17px;
+          background-color: white;
+          border: 4px solid #FF9F55;
+          top: 15px;
+          border-radius: 50%;
+          z-index: 1;
+      }
 
-        .right {
-            left: 50%;
-        }
+      .left {
+          left: 0;
+      }
 
-        .left::before {
-            content: " ";
-            height: 0;
-            position: absolute;
-            top: 22px;
-            width: 0;
-            z-index: 1;
-            right: 30px;
-            border: medium solid white;
-            border-width: 10px 0 10px 10px;
-            border-color: transparent transparent transparent white;
-        }
+      .right {
+          left: 50%;
+      }
 
-        .right::before {
-            content: " ";
-            height: 0;
-            position: absolute;
-            top: 22px;
-            width: 0;
-            z-index: 1;
-            left: 30px;
-            border: medium solid white;
-            border-width: 10px 10px 10px 0;
-            border-color: transparent white transparent transparent;
-        }
+      .left::before {
+          content: " ";
+          height: 0;
+          position: absolute;
+          top: 22px;
+          width: 0;
+          z-index: 1;
+          right: 30px;
+          border: medium solid white;
+          border-width: 10px 0 10px 10px;
+          border-color: transparent transparent transparent white;
+      }
 
-        .right::after {
-            left: -16px;
-        }
+      .right::before {
+          content: " ";
+          height: 0;
+          position: absolute;
+          top: 22px;
+          width: 0;
+          z-index: 1;
+          left: 30px;
+          border: medium solid white;
+          border-width: 10px 10px 10px 0;
+          border-color: transparent white transparent transparent;
+      }
 
-        .content {
-            padding: 20px 30px;
-            background-color: white;
-            position: relative;
-            border-radius: 6px;
-        }
+      .right::after {
+          left: -16px;
+      }
 
-        @media screen and (max-width: 600px) {
-            .timeline::after {
-                left: 31px;
-            }
-            
-            .container {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-            
-            .container::before {
-                left: 60px;
-                border: medium solid white;
-                border-width: 10px 10px 10px 0;
-                border-color: transparent white transparent transparent;
-            }
+      .content {
+          padding: 20px 30px;
+          background-color: white;
+          position: relative;
+          border-radius: 6px;
+      }
 
-            .left::after, .right::after {
-                left: 15px;
-            }
-            
-            .right {
-                left: 0%;
-            }
-        }
+      @media screen and (max-width: 600px) {
+          .timeline::after {
+              left: 31px;
+          }
+          
+          .container {
+              width: 100%;
+              padding-left: 70px;
+              padding-right: 25px;
+          }
+          
+          .container::before {
+              left: 60px;
+              border: medium solid white;
+              border-width: 10px 10px 10px 0;
+              border-color: transparent white transparent transparent;
+          }
+
+          .left::after, .right::after {
+              left: 15px;
+          }
+          
+          .right {
+              left: 0%;
+          }
+      }
+      .start{
+        margin: 100px;
+        height: 500px;
+        padding-top: 10rem;
+        background-color: #A3B5C1;
+        transition: background-color 0.5s ease;
+      }
+      .answer_bt_yes{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+        background-color: rgb(218, 228, 235);
+        
+        
+      }
+
+      .start:hover .display-1:first-of-type{
+        font-size: 20px;
+        transition: 0.5s;
+        
+      }
+      .start .display-1:first-of-type{
+        color: black;
+        font-size: 70px;
+        transition: all 0.5s ease;
+      }
+      .start:hover .display-1:last-of-type{
+        font-size: 120px;
+        color: #4F5464;
+        transition: 0.5s;
+        
+      }
+      .start .display-1:last-of-type{
+        color: black;
+        font-size: 80px;
+        transition: all 0.5s ease;
+      }
+      .start:hover{
+        background-color: #AABAAB;
+        transition: 1s;
+      }
+        
     </style>
 </head>
 <body>
     <!---Header--->
-    <nav class="navbar navbar-expand-lg " style="background-color: #cccccc;">
+    <nav class="navbar navbar-expand-lg " style="background-color: #cccccc;font-size: 16px;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="home2.html">TRIAGE</a>
+            <a class="navbar-brand" href="home.html">TRIAGE</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="home2.html">Home</a>
+                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="New.html">News</a>
@@ -142,17 +189,17 @@
                     </li>
                 </ul>
             </div>
+            <img src="icon/ERGiftcard-Box.png" style="height: 50px;opacity: 1;" draggable="false">
         </div>
     </nav>
 
     <!---Start--->
+    <a href="start.html" style="text-decoration: none;">
     <div class="start">
-        <h1 class="display-1">TRIAGE </h1>
-        <div class="grid-container">
-            <nav class="shadow btn answer_bt_yes start_bt">START</nav>
-        </div>
+      <h1 class="display-1 start-text" >S T A R T</h1>
+        <h1 class="display-1" style="font-weight: bold;">TRIAGE</h1>
     </div>
-
+    </a>
     <!---Card--->
     <div class="slider">
         <div class="item">
@@ -183,8 +230,8 @@
             <h1>slide 7</h1>
             info
         </div>
-        <button id="next">></button>
-        <button id="prev"><</button>
+        <button id="next"><</button>
+        <button id="prev">></button>
         <script>
             let items = document.querySelectorAll('.slider .item');
                 let next = document.getElementById('next');
@@ -214,68 +261,71 @@
                     }
                 }
                 loadShow();
-                next.onclick = function(){
+                prev.onclick = function(){
                     active = active + 1 < items.length ? active + 1 : active;
                     loadShow();
                 }
-                prev.onclick = function(){
+                next.onclick = function(){
                     active = active - 1 >= 0 ? active - 1 : active;
                     loadShow();
                 }
+              
         </script>
     </div>
 
     <!---How to use--->
     <div class="timeline">
-        <div class="container left">
-          <div class="content">
-            <h2>2017</h2>
-            <p>hi</p>
-          </div>
-        </div>
-        <div class="container right">
-          <div class="content">
-            <h2>2016</h2>
-            <p>hi</p>
-          </div>
-        </div>
-        <div class="container left">
-          <div class="content">
-            <h2>2015</h2>
-            <p>hi</p>
-          </div>
-        </div>
-        <div class="container right">
-          <div class="content">
-            <h2>2012</h2>
-            <p>hi</p>
-          </div>
-        </div>
-        <div class="container left">
-          <div class="content">
-            <h2>2011</h2>
-            <p>hi</p>
-          </div>
-        </div>
-        <div class="container right">
-          <div class="content">
-            <h2>2007</h2>
-            <p>hi</p>
-          </div>
+      <div class="container-scroll left">
+        <div class="content">
+          <h2>Click start</h2>
+          <p>hi</p>
         </div>
       </div>
+      <div class="container-scroll right">
+        <div class="content">
+          <h2>2016</h2>
+          <p>hi</p>
+        </div>
+      </div>
+      <div class="container-scroll left">
+        <div class="content">
+          <h2>2015</h2>
+          <p>hi</p>
+        </div>
+      </div>
+      <div class="container-scroll right">
+        <div class="content">
+          <h2>2012</h2>
+          <p>hi</p>
+        </div>
+      </div>
+      <div class="container-scroll left">
+        <div class="content">
+          <h2>2011</h2>
+          <p>hi</p>
+        </div>
+      </div>
+      <div class="container-scroll right">
+        <div class="content">
+          <h2>2007</h2>
+          <p>hi</p>
+        </div>
+      </div>
+    </div>
 
     <!---Why it start--->
-
+    <div class="container-why">
+      <div class="info-why">
+        <h3>Why did we start this</h3>
+      </div>
+      <div class="points-why">
+        <div class="point-why"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       4350          <h3>Error</h3>
+          <p>info</p>
+        </div>
+      </div>
+    </div>
     <!---Developer info--->
 
     <!---Footer--->
 </body>
 </html> 
-
-
-
-
-
-
-

@@ -35,8 +35,9 @@
 
         }
         .grid-container {
-            display: grid;
-            grid-template-columns: auto auto;
+            display: flex;
+            margin: 20px;
+            grid-template-columns: 260px auto;
 
         }
         .answer_bt_no:hover{
@@ -50,6 +51,10 @@
         .answer_bt_other:hover{
             background-color: rgb(184, 230, 124);
             transition: 1s;
+        }
+        .answer_bt_other{
+            text-align: center;
+            padding-top: 150px
         }
         .pagecanvas{
             margin: 100px;
@@ -178,9 +183,11 @@
 // });
 
 const qaArray = [
-            { question: "Hi", answers: ["Hello", "Hi there"] },
-            { question: "How are you?", answers: ["Good", "Not bad","who care","idk","who ask?"] },
-            { question: "What's up?", answers: ["Not much", "Just hanging out"] },
+            { question: "Age", answers: ["Older than 17", "Yonger or 17"] },
+            { question: "Gender", answers: ["Male", "Female"] },
+            { question: "(Observation) Airway status", answers: ["Obstructed", "At risk", "Clear"] },
+            { question: "(Observation) Breathing status", answers: ["Irregular breathing for example shortness of breath, weird sound while breathing", "Normal breathing"] },
+            { question: "Breathing rate", answers: [">40 or <10", "30-40", "10-30"] },
             { question: "Good day", answers: ["Indeed", "Yes, it is"] }
         ];
 
@@ -244,12 +251,6 @@ const qaArray = [
         document.addEventListener('DOMContentLoaded', function() {
             displayQuestionAndAnswers(currentIndexArray[0]);
         });
-
-
 </script>
 </body>
-
-
-</html>       
-
-
+</html>      
