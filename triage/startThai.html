@@ -69,7 +69,7 @@
         
 <div class="pageCanvas shadow-lg" style="padding: 80px;">
 
-<h1 class="display-2" style="text-align: center;position:sticky;font-size:50px;" id="levelDisplay">Question</h1>     
+<h1 class="display-2" style="text-align: center;font-size:50px;" id="levelDisplay">Question</h1>     
 
      
         <div style="height: 120px;margin: auto;">
@@ -82,14 +82,15 @@
                 </div>
             </div>
         </div>
+        
+        <hr  class="mt-5">
 
-
-        <div class="grid-container" style="margin-left: 5%;">
-            <nav class=" shadow answer_bt_yes" id="answerButton1" style="text-align: center;padding-top: 150px;border-radius: 20px;" draggable="false" onclick="nextQuestion(0)">Yes</nav>
-            <article class=" shadow answer_bt_no" id="answerButton2" style="text-align: center;padding-top: 150px ;border-radius: 20px;" draggable="false" onclick="nextQuestion(1)">No</article>
-            <article class=" shadow answer_bt_other" id="answerButton3" style="display: none;" draggable="false" onclick="nextQuestion(2)"></article>
-            <article class=" shadow answer_bt_other" id="answerButton4" style="display: none;" draggable="false" onclick="nextQuestion(3)"></article>
-            <article class=" shadow answer_bt_other" id="answerButton5" style="display: none;" draggable="false" onclick="nextQuestion(4)"></article>
+        <div class="grid-container mt-5" style="margin-left: 5%;">
+            <nav class=" shadow answer_bt_yes" id="answerButton1" style="text-align: center;padding-top: 10px;border-radius: 20px;" draggable="false" onclick="nextQuestion(0)">Yes</nav>
+            <article class=" shadow answer_bt_no" id="answerButton2" style="text-align: center;padding-top: 10px ;border-radius: 20px;" draggable="false" onclick="nextQuestion(1)">No</article>
+            <article class=" shadow answer_bt_other mt-3" id="answerButton3" style="display: none;" draggable="false" onclick="nextQuestion(2)"></article>
+            <article class=" shadow answer_bt_other mt-3" id="answerButton4" style="display: none;" draggable="false" onclick="nextQuestion(3)"></article>
+            <article class=" shadow answer_bt_other  mt-3" id="answerButton5" style="display: none;" draggable="false" onclick="nextQuestion(4)"></article>
         </div>
 
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -156,12 +157,12 @@
 
 const qaArray = [
     { question: "อายุ", answers: ["มากกว่า 17 ปี", "อายุ 17 ปี หรือน้อยกว่า"], triage: [2, 3] },
-    { question: "เพศ", answers: ["ชาย", "หญิง"], triage: [2, 3] },
-    { question: "การรับรู้", answers: ["ตื่นตระหนก", "ปกติ"], triage: [2, 3] },
-    { question: "(การสังเกต) สถานะทางเดินหายใจ", answers: ["อุดตัน", "เสี่ยง", "โล้ง"], triage: [3, 2, ] },
+    { question: "เพศ", answers: ["ชาย", "หญิง"], triage: [1, 0] },
+    { question: "การรับรู้", answers: ["ตื่นตระหนก", "ปกติ","หมดสติ"], triage: [3, 1, 5] },
+    { question: "(การสังเกต) สถานะทางเดินหายใจ", answers: ["อุดตัน", "เสี่ยง", "โล้ง"], triage: [5, 2, 0] },
     { question: "(การสังเกต) สถานะการหายใจ", answers: ["การหายใจผิดปกติเช่น หายใจสั้น เสียงแปลก ๆ ในการหายใจ", "การหายใจปกติ"], triage: [3, 1] },
-    { question: "อัตราการหายใจ", answers: [">40 หรือ <10", "30-40", "10-30"], triage: [3, 1] },
-    { question: "วันนี้เป็นวันที่ดีไหม", answers: ["แน่นอน", "ใช่แล้ว"], triage: [2, 2] }
+    { question: "อัตราการหายใจ", answers: [">40 หรือ <10", "30-40", "10-30"], triage: [3, 1, 1] },
+    { question: "วันนี้เป็นวันที่ดีไหม", answers: ["แน่นอน", "ใช่แล้ว"], triage: [1, 1] }
 ];
 
 
@@ -251,13 +252,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function showResult(){
     // ตรรกะการตัดสินใจตามค่าของตัวนับ
-    if (result >= 40) {
-        document.getElementById('levelDisplay').innerText = `${result}`;
-    } else if (result >= 30) {
+    if (triageLevel >= 10) {
+        document.getElementById('levelDisplay').innerText = 'วิกฤษ';
+    } else if (triageLevel >= 6) {
         document.getElementById('levelDisplay').innerText = 'ลำดับความสำคัญสูง';
-    } else if (result >= 20) {
+    } else if (triageLevel >= 3) {
         document.getElementById('levelDisplay').innerText = 'ลำดับความสำคัญปานกลาง';
-    } else if (result >= 10) {
+    } else if (result >= 1) {
         document.getElementById('levelDisplay').innerText = 'ลำดับความสำคัญต่ำ';
     } else {
         document.getElementById('levelDisplay').innerText = 'คำถาม';

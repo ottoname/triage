@@ -5,8 +5,10 @@
     }
 
   }
+
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif,Mitr;
     margin: 50px;
     background-color: #AABAAB;
 }
@@ -21,8 +23,6 @@ nav {
     height: 300px; 
     background: #ffffff;
     padding: 20px;
-    
-    
 }
 article {
     padding: 20px;
@@ -33,9 +33,11 @@ article {
 }
 .grid-container {
     display:grid;
-    grid-template-columns: 320px 320px ;
+    grid-template-columns: auto 320px ;
+    height: auto;
     margin-top: 20px;
     border-spacing: 10px;
+    font-size: 30px ;
 
 }
 .answer_bt_no:hover{
@@ -56,7 +58,7 @@ article {
 }
 .answer_bt_other{
     text-align: center;
-    padding-top: 150px;
+    padding-top: 10px;
     border-radius: 20px;
 } 
 .pageCanvas{
@@ -71,8 +73,9 @@ article {
 .next-back-btn{
     display:flex;
     justify-content: space-between;
-    padding: 10px;
+    /* padding: 10px; */
     border-spacing: 10px;
+    font-size: 80px;
     
 }
 

@@ -1,45 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Decision Tree Example</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 <body>
-    <h2>Decision Tree Example</h2>
-    <p>Press the button to proceed through the decision tree.</p>
-    <button onclick="incrementCounter()">Press Me</button>
-    <p id="counterDisplay">Counter: 0</p>
-    <p id="levelDisplay">Level: Not determined</p>
+    <h1>QR Code Generator</h1>
+    <form id="dataForm">
+        <label for="dataInput">Enter Data:</label>
+        <input type="text" id="dataInput" name="dataInput" required>
+        <button type="submit">Generate QR Code & PDF</button>
+    </form>
+    <div id="qrcode" style="display:none;"></div>
 
     <script>
-        // Initialize counter
-        let n = 0;
-
-        // Function to increment counter and update UI
-        function incrementCounter() {
-            n++;
-            document.getElementById('counterDisplay').innerText = `Counter: ${n}`;
-
-            // Decision logic based on counter value
-            if (n > 30) {
-                document.getElementById('levelDisplay').innerText = 'Level 1';
-            } else if (n > 20) {
-                document.getElementById('levelDisplay').innerText = 'Level 2';
-            } else if (n > 10) {
-                document.getElementById('levelDisplay').innerText = 'Level 3';
-            } else if (n > 5) {
-                document.getElementById('levelDisplay').innerText = 'Level 4';
-            } else if (n >= 1) {
-                document.getElementById('levelDisplay').innerText = 'Level 5';
-            } else {
-                document.getElementById('levelDisplay').innerText = 'Level not determined';
-            }
-
-            // Reset counter if it exceeds 30
-            if (n > 30) {
-                n = 0;
-                document.getElementById('counterDisplay').innerText = `Counter: ${n}`;
-            }
-        }
+        $(document).ready(function () {
+            $('#dataForm').on('submit', function (event) {
+                event.preventDefault();
+                let data = $('#dataInput').val();
+                
+                // Generate QR Code
+                QRCode.toCanvas(document.createElement('canvas'), data, function (error, canvas) {
+                    if (error) {
+                        console.error(error);
+                        return;
+                    }
+                    console.log('QR code generated!');
+                    
+                    // Show QR code in popup
+                    let qrPopup = window.open('', '_blank', 'width=200,height=200');
+                    qrPopup.document.write('<img src="' + canvas.toDataURL() + '"/>');
+                    
+                    // Generate PDF
+                    const { jsPDF } = window.jspdf;
+                    const doc = new jsPDF();
+                    doc.text("Input Data: " + data, 10, 10);
+                    doc.addImage(canvas.toDataURL(), 'PNG', 10, 20, 50, 50);
+                    doc.save('data.pdf');
+                });
+            });
+        });
     </script>
 </body>
 </html>
