@@ -69,20 +69,16 @@
         
 <div class="pageCanvas shadow-lg" style="padding: 80px;">
 
-<h1 class="display-2" style="text-align: center;position:sticky;font-size:50px;" id="levelDisplay">Question</h1>  
-
-<div class="next-back-btn">
-    <button type="button" class="btn btn-dark" style="text-align: left;"  onclick="backQuestion()">Back</a></button>
-    <button type="button" class="btn btn-dark" style="text-align: right;"  onclick="nextQuestion()">Next</a></button>
-        
- </div>    
+<h1 class="display-2" style="text-align: center;position:sticky;font-size:50px;" id="levelDisplay">Question</h1>     
 
      
         <div style="height: 120px;margin: auto;">
             <div class="shadow-lg p-3  rounded rounded " style="border-radius: 50px;">
-                <div>
+                <div style="display: flex;" class="next-back-btn">
+                    <button type="button" class="btn btn-dark" style="text-align: center;width: 80px;"  onclick="backQuestion()"><text style="font-size: 30px;"><</text></a></button>
                     <h1 id="questionContainer" style="text-align: center;">...</h1>
                     <!-- <p>Current Number: <span id="number">0</span></p> -->
+                    <button type="button" class="btn btn-dark" style="text-align: center;width: 80px;"  onclick="nextQuestion()"><text style="font-size: 30px;">></text></a></button>
                 </div>
             </div>
         </div>
@@ -159,13 +155,13 @@
 <script>
 
 const qaArray = [
-    { question: "อายุ", answers: ["มากกว่า 17 ปี", "อายุ 17 ปี หรือน้อยกว่า"], triage: [1, 3] },
-    { question: "เพศ", answers: ["ชาย", "หญิง"], triage: [1, 3] },
-    { question: "การรับรู้", answers: ["ตื่นตระหนก", "ปกติ"], triage: [1, 3] },
-    { question: "(การสังเกต) สถานะทางเดินหายใจ", answers: ["อุดตัน", "เสี่ยง", "โล่งฃ"], triage: [1, 3, 1] },
+    { question: "อายุ", answers: ["มากกว่า 17 ปี", "อายุ 17 ปี หรือน้อยกว่า"], triage: [2, 3] },
+    { question: "เพศ", answers: ["ชาย", "หญิง"], triage: [2, 3] },
+    { question: "การรับรู้", answers: ["ตื่นตระหนก", "ปกติ"], triage: [2, 3] },
+    { question: "(การสังเกต) สถานะทางเดินหายใจ", answers: ["อุดตัน", "เสี่ยง", "โล้ง"], triage: [3, 2, ] },
     { question: "(การสังเกต) สถานะการหายใจ", answers: ["การหายใจผิดปกติเช่น หายใจสั้น เสียงแปลก ๆ ในการหายใจ", "การหายใจปกติ"], triage: [3, 1] },
     { question: "อัตราการหายใจ", answers: [">40 หรือ <10", "30-40", "10-30"], triage: [3, 1] },
-    { question: "วันนี้เป็นวันที่ดีไหม", answers: ["แน่นอน", "ใช่แล้ว"], triage: [1, 1] }
+    { question: "วันนี้เป็นวันที่ดีไหม", answers: ["แน่นอน", "ใช่แล้ว"], triage: [2, 2] }
 ];
 
 
@@ -252,11 +248,11 @@ document.addEventListener('DOMContentLoaded', function() {
     displayQuestionAndAnswers(currentIndexArray[0]);
 });
 
-javascript
+
 function showResult(){
     // ตรรกะการตัดสินใจตามค่าของตัวนับ
     if (result >= 40) {
-        document.getElementById('levelDisplay').innerText = 'วิกฤต';
+        document.getElementById('levelDisplay').innerText = `${result}`;
     } else if (result >= 30) {
         document.getElementById('levelDisplay').innerText = 'ลำดับความสำคัญสูง';
     } else if (result >= 20) {
@@ -264,7 +260,7 @@ function showResult(){
     } else if (result >= 10) {
         document.getElementById('levelDisplay').innerText = 'ลำดับความสำคัญต่ำ';
     } else {
-        document.getElementById('levelDisplay').innerText = 'ข้อมูลยังไม่พอ';
+        document.getElementById('levelDisplay').innerText = 'คำถาม';
     }
     showTriage();
 }
@@ -277,10 +273,8 @@ function showTriage() {
         triageText = 'Yellow';
     } else if (triageLevel >= 3) {
         triageText = 'Green';
-    } else {
-        triageText = 'Black';
     }
-    document.getElementById('levelDisplay').innerText += ` Triage Level: ${triageText}`;
+    document.getElementById('levelDisplay').innerText += `\n Triage Level: ${triageText}`;
 }
 
         
