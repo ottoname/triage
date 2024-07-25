@@ -1,4 +1,4 @@
-<!DOCTYPE html>            
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,12 +9,19 @@
     <title>Triage</title>
     <style>
         /* Add your custom CSS styles here */
+        .results-section {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
     </style>
 </head>
 <body>
 
 <div class="justify-content-center" style="position:relative;" id="button">
-    <div class=" d-md-flex justify-content-md-end">
+    <div class="d-md-flex justify-content-md-end">
         <button type="button" class="btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" style="background-color: rgb(243, 243, 243);">
             <img src="icon/setting.png" style="width: 20px;">
         </button>
@@ -24,7 +31,7 @@
 
         <h1 class="display-2" style="text-align: center; font-size: 50px;" id="levelDisplay">Question</h1>     
 
-        <div style="height: 120px; margin: auto;">
+        <div style="height: 120px; margin: auto;" id="questionPage">
             <div class="shadow-lg p-3 rounded rounded " style="border-radius: 50px;">
                 <div style="display: flex;" class="next-back-btn">
                     <button type="button" class="btn btn-dark" style="text-align: center; width: 80px;" onclick="backQuestion()"><text style="font-size: 30px;">&lt;</text></button>
@@ -36,7 +43,7 @@
         
         <hr class="mt-5">
 
-        <div class="grid-container mt-5" style="margin-left: 5%;">
+        <div class="grid-container mt-5" style="margin-left: 5%;" id="answerButtons">
             <nav class="shadow answer_bt_yes" id="answerButton1" style="text-align: center; padding-top: 10px; border-radius: 20px;" onclick="nextQuestion(0)">Yes</nav>
             <article class="shadow answer_bt_no" id="answerButton2" style="text-align: center; padding-top: 10px; border-radius: 20px; display: none;" onclick="nextQuestion(1)">No</article>
             <article class="shadow answer_bt_other mt-3" id="answerButton3" style="display: none;" onclick="nextQuestion(2)"></article>
@@ -78,6 +85,14 @@
             </div>
         </div>
 
+        <!-- Div for displaying results -->
+        <div class="results-section" id="resultsSection">
+            <h1 id="finalResult"></h1>
+            <h2>Your Answers:</h2>
+            <ul class="list-group" id="answersList"></ul>
+            <button type="button" class="btn btn-primary" onclick="restartQuiz()">Restart Quiz</button>
+        </div>
+
     </div>
 
     <script>
@@ -93,11 +108,13 @@
 
         let currentIndex = 0; // Initialize current question index
         let triageLevel = 0; // Initialize triage level
+        let userAnswers = []; // Array to store user's answers
 
         function backQuestion() {
             if (currentIndex > 0) {
                 currentIndex--; // Move to the previous question
                 displayQuestionAndAnswers(currentIndex);
+                userAnswers.pop(); // Remove the last answer
             } else {
                 console.log("Already at the first question.");
             }
@@ -106,6 +123,7 @@
         function nextQuestion(answerIndex) {
             if (currentIndex < qaArray.length) {
                 triageLevel += qaArray[currentIndex].triage[answerIndex];
+                userAnswers.push(qaArray[currentIndex].answers[answerIndex]); // Store the user's answer
 
                 currentIndex++;
 
@@ -138,24 +156,8 @@
             }
         }
 
-        function displayFinalResult() {
-            const questionContainer = document.getElementById('questionContainer');
-            questionContainer.textContent = `Final Result: Triage Level ${triageLevel}`;
-            
-            document.getElementById('answerButton1').style.display = 'none';
-            document.getElementById('answerButton2').style.display = 'none';
-            document.getElementById('answerButton3').style.display = 'none';
-            document.getElementById('answerButton4').style.display = 'none';
-            document.getElementById('answerButton5').style.display = 'none';
-            showResult();
-        }
 
-        // Display initial question and answers
-        displayQuestionAndAnswers(currentIndex);
-
-
-        
-function showResult(){
+        function showResult(){
     if (triageLevel >= 10) {
         document.getElementById('levelDisplay').innerText = 'วิกฤษ';
     } else if (triageLevel >= 6) {
@@ -181,8 +183,49 @@ function showTriage() {
     }else if (triageLevel > 50){
         triageText = 'Dead';
     }
-    document.getElementById('levelDisplay').innerText += `\n Triage Level: ${triageText} ${result}`;
+    
 }
+
+
+        function displayFinalResult() {
+            const questionPage = document.getElementById('questionPage');
+            const answerButtons = document.getElementById('answerButtons');
+            const finalResult = document.getElementById('finalResult');
+            const answersList = document.getElementById('answersList');
+            const resultsSection = document.getElementById('resultsSection');
+
+            // Hide the question page
+            questionPage.style.display = 'none';
+            answerButtons.style.display = 'none';
+
+            // Show the results section
+            finalResult.textContent = `Triage Level: ${triageLevel}`;
+            showResult();
+            showTriage();
+            
+            answersList.innerHTML = '';
+            userAnswers.forEach((answer, index) => {
+                const li = document.createElement('li');
+                li.classList.add('list-group-item');
+                li.innerHTML = `<b>Question ${index + 1}:</b> ${qaArray[index].question}<br><b>Answer:</b> ${answer}`;
+                answersList.appendChild(li);
+            });
+
+            resultsSection.style.display = 'block'; // Show the results section
+        }
+
+        function restartQuiz() {
+            currentIndex = 0;
+            triageLevel = 0;
+            userAnswers = [];
+            document.getElementById('questionPage').style.display = 'block'; // Show the question page
+            document.getElementById('answerButtons').style.display = 'block'; // Show the answer buttons
+            document.getElementById('resultsSection').style.display = 'none'; // Hide the results section
+            displayQuestionAndAnswers(currentIndex);
+        }
+
+        // Display initial question and answers
+        displayQuestionAndAnswers(currentIndex);
     </script>
 
 </body>
