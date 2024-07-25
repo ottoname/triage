@@ -86,11 +86,11 @@
         <hr  class="mt-5">
 
         <div class="grid-container mt-5" style="margin-left: 5%;">
-            <nav class=" shadow answer_bt_yes" id="answerButton1" style="text-align: center;padding-top: 10px;border-radius: 20px;" draggable="false" onclick="nextQuestion(0)">Yes</nav>
-            <article class=" shadow answer_bt_no" id="answerButton2" style="text-align: center;padding-top: 10px ;border-radius: 20px;" draggable="false" onclick="nextQuestion(1)">No</article>
-            <article class=" shadow answer_bt_other mt-3" id="answerButton3" style="display: none;" draggable="false" onclick="nextQuestion(2)"></article>
-            <article class=" shadow answer_bt_other mt-3" id="answerButton4" style="display: none;" draggable="false" onclick="nextQuestion(3)"></article>
-            <article class=" shadow answer_bt_other  mt-3" id="answerButton5" style="display: none;" draggable="false" onclick="nextQuestion(4)"></article>
+            <nav class=" shadow answer_bt_yes" id="answerButton1" style="text-align: center;padding-top: 10px;border-radius: 20px;" draggable="false" onclick="nextQuestion(qaArray(triage[1]))">Yes</nav>
+            <article class=" shadow answer_bt_no" id="answerButton2" style="text-align: center;padding-top: 10px ;border-radius: 20px;" draggable="false" onclick="nextQuestion(triage[2])">No</article>
+            <article class=" shadow answer_bt_other mt-3" id="answerButton3" style="display: none;" draggable="false" onclick="nextQuestion(triage[3])"></article>
+            <article class=" shadow answer_bt_other mt-3" id="answerButton4" style="display: none;" draggable="false" onclick="nextQuestion(triage[4])"></article>
+            <article class=" shadow answer_bt_other  mt-3" id="answerButton5" style="display: none;" draggable="false" onclick="nextQuestion(triage[5])"></article>
         </div>
 
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -173,10 +173,14 @@ const qaArray = [
 let currentIndexArray = [0];
 let result = 0; // Initialize result counter
 let triageLevel = 0;
+let triage = [];
 
 function Thaiword(){
 
 }
+
+
+
 
 function backQuestion() {
     // Check if there's a previous question to go back to
@@ -189,24 +193,35 @@ function backQuestion() {
     }
 }
 
-// Function to display the next question and answers
+
 function nextQuestion(buttonIndex) {
-    // Calculate the next index
+
     let nextIndex = currentIndexArray[currentIndexArray.length - 1] + 1;
 
-    // Check if we've reached the end of the qaArray
-    if (nextIndex < qaArray.length) {
-        currentIndexArray.push(nextIndex);
-        displayQuestionAndAnswers(nextIndex);
+            if (currentIndex < qaArray.length) {
+                // Get the triage array for the current question
+                const triageArray = qaArray[currentIndex].triage;
 
-        // Update result and triage level based on button clicked
-        result += (buttonIndex + 1) * 10; // Example of result calculation
-        triageLevel += qaArray[currentIndexArray[currentIndexArray.length - 2]].triage[buttonIndex];
+                // Get the triage value based on the selected answer index
+                const result = triageArray[buttonIndex];
+                triageLevel += qaArray[currentIndexArray[currentIndexArray.length - 2]].triage[buttonIndex];
 
-    } else {
-        displayFinalResult();
-    }
-}
+                // Display the triage value
+                document.getElementById('triageValuedisplay').innerText += `Triage Value: ${result}`;
+
+                // Move to the next question
+                currentIndex++;
+
+                // Update UI based on currentIndex (show/hide buttons, etc.)
+                updateUI();
+            } else {
+                displayFinalResult();
+            }
+        }
+
+
+// Function to display the next question and answers
+
 
 // Function to display the current question and answers
 function displayQuestionAndAnswers(index) {
@@ -217,8 +232,6 @@ function displayQuestionAndAnswers(index) {
     const answerButton4 = document.getElementById('answerButton4');
     const answerButton5 = document.getElementById('answerButton5');
     showResult()
-
-    // showTriage()
 
     const answerButtons = [answerButton1, answerButton2, answerButton3, answerButton4, answerButton5];
 
@@ -254,7 +267,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function showResult(){
-    // ตรรกะการตัดสินใจตามค่าของตัวนับ
     if (triageLevel >= 10) {
         document.getElementById('levelDisplay').innerText = 'วิกฤษ';
     } else if (triageLevel >= 6) {
