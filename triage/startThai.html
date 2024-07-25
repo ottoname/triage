@@ -119,6 +119,9 @@
                             <label for="checkbox3">Checkbox 3</label>
                             <input type="checkbox" id="checkbox3" name="checkboxes" class="checkbox">
                         </li>
+                        <li>
+                            <label style="font-size: 20px;font-weight: bold;">Pluse-one</label>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -275,7 +278,7 @@ function showTriage() {
     } else if (triageLevel >= 3) {
         triageText = 'Green';
     }
-    document.getElementById('levelDisplay').innerText += `\n Triage Level: ${triageText}`;
+    document.getElementById('levelDisplay').innerText += `\n Triage Level: ${triageText} ${result}`;
 }
 
         
