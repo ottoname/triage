@@ -88,7 +88,7 @@
         <!-- Div for displaying results -->
         <div class="results-section" id="resultsSection">
             <h1 id="finalResult"></h1>
-            <h2>Your Answers:</h2>
+            <h2>Your Answers :</h2>
             <ul class="list-group" id="answersList"></ul>
             <button type="button" class="btn btn-primary" onclick="restartQuiz()">Restart Quiz</button>
         </div>
@@ -103,7 +103,7 @@
             { question: "(การสังเกต) สถานะทางเดินหายใจ", answers: ["อุดตัน", "เสี่ยง", "โล้ง"], triage: [5, 2, 0] },
             { question: "(การสังเกต) สถานะการหายใจ", answers: ["การหายใจผิดปกติเช่น หายใจสั้น เสียงแปลก ๆ ในการหายใจ", "การหายใจปกติ"], triage: [3, 1] },
             { question: "อัตราการหายใจ", answers: [">40 หรือ <10", "30-40", "10-30"], triage: [3, 1, 1] },
-            { question: "วันนี้เป็นวันที่ดีไหม", answers: ["แน่นอน", "ใช่แล้ว"], triage: [1, 1] }
+            { question: "วันนี้เป็นวันที่ดีไหม", answers: ["แน่นอน", "ใช่แล้ว"], triage: [1, 1] },
         ];
 
         let currentIndex = 0; // Initialize current question index
@@ -164,7 +164,7 @@
         document.getElementById('levelDisplay').innerText = 'ลำดับความสำคัญสูง';
     } else if (triageLevel >= 3) {
         document.getElementById('levelDisplay').innerText = 'ลำดับความสำคัญปานกลาง';
-    } else if (result >= 1) {
+    } else if (triageLevel >= 1) {
         document.getElementById('levelDisplay').innerText = 'ลำดับความสำคัญต่ำ';
     } else {
         document.getElementById('levelDisplay').innerText = 'คำถาม';
@@ -174,16 +174,15 @@
 
 function showTriage() {
     let triageText = '';
-    if (triageLevel >= 10) {
+    if (triageLevel > 50){
+        triageText = 'Blue';
+    }else if (triageLevel >= 10) {
         triageText = 'Red';
     } else if (triageLevel >= 6) {
         triageText = 'Yellow';
     } else if (triageLevel >= 3) {
         triageText = 'Green';
-    }else if (triageLevel > 50){
-        triageText = 'Dead';
-    }
-    
+    } 
 }
 
 
@@ -201,7 +200,7 @@ function showTriage() {
             // Show the results section
             finalResult.textContent = `Triage Level: ${triageLevel}`;
             showResult();
-            showTriage();
+
             
             answersList.innerHTML = '';
             userAnswers.forEach((answer, index) => {
