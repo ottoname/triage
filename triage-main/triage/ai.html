@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+<body>
+    <h1>QR Code Generator</h1>
+    <form id="dataForm">
+        <label for="dataInput">Enter Data:</label>
+        <input type="text" id="dataInput" name="dataInput" required>
+        <button type="submit">Generate QR Code & PDF</button>
+    </form>
+    <div id="qrcode" style="display:none;"></div>
+
+    <script>
+        $(document).ready(function () {
+            $('#dataForm').on('submit', function (event) {
+                event.preventDefault();
+                let data = $('#dataInput').val();
+                
+                // Generate QR Code
+                QRCode.toCanvas(document.createElement('canvas'), data, function (error, canvas) {
+                    if (error) {
+                        console.error(error);
+                        return;
+                    }
+                    console.log('QR code generated!');
+                    
+                    // Show QR code in popup
+                    let qrPopup = window.open('', '_blank', 'width=200,height=200');
+                    qrPopup.document.write('<img src="' + canvas.toDataURL() + '"/>');
+                    
+                    // Generate PDF
+                    const { jsPDF } = window.jspdf;
+                    const doc = new jsPDF();
+                    doc.text("Input Data: " + data, 10, 10);
+                    doc.addImage(canvas.toDataURL(), 'PNG', 10, 20, 50, 50);
+                    doc.save('data.pdf');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
